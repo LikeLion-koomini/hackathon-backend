@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from column.models import Column
+from column.models.column import Column
 
 class CheckPreferView(APIView):
     def get(self, request, column_id, user_id):

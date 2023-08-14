@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from column.models import Column, ColumnPrefer
+from column.models._init_ import Column, ColumnPrefer
 
 class ColumnSerializer(serializers.ModelSerializer):
     class Meta:

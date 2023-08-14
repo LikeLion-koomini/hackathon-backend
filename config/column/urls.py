@@ -1,11 +1,12 @@
 from django.urls import path
-from column.views import ColumnListView, ColumnCertainView, CheckPreferView, PreferView
+from .views._init_ import *
 
 app_name = 'column'
 
 urlpatterns = [
-    path('column/', ColumnListView.as_view(), name='column-list'),
-    path('column/<int:pk>/', ColumnCertainView.as_view(), name='column-detail'),
-    path('column/<int:column_id>/likes/<int:user_id>/', CheckPreferView.as_view(), name='check-like'),
-    path('column/<int:column_id>/likes/<int:user_id>/', PreferView.as_view(), name='like'),
+    path('', ColumnListView.as_view(), name='column-list'),
+    path('<uuid:column_id>/', ColumnCertainView.as_view(), name='column-detail'),
+    path('register/', ColumnCRUDView.as_view(), name='column-register'), # 이거 자동으로 칼럼 현재 사용자한테 넣어줌
+    path('<uuid:column_id>/likes/<uuid:uuid>/', CheckPreferView.as_view(), name='check-like'), # 아직 안해봄
+    path('<uuid:column_id>/likes/<uuid:uuid>/', PreferView.as_view(), name='like'), #아직 안해봄
 ]
