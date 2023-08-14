@@ -15,10 +15,11 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         birth = validated_data.get('birth')
         user = User(
             userId=userId, 
-            password=password, 
             userName=userName, 
             email=email, 
             phone_number=phone_number, 
-            birth=birth)
+            birth=birth
+        )
+        user.set_password(password)
         user.save()
         return user

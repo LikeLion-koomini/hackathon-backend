@@ -30,8 +30,8 @@ class UserRegisterView(APIView):
                 status=status.HTTP_200_OK
             )
 
-            # res.set_cookie("access_token",access_token, httponly=True)
-            # res.set_cookie("refresh_token", refresh_token, httponly=True)
+            res.set_cookie("access_token",access_token, httponly=True)
+            res.set_cookie("refresh_token", refresh_token, httponly=True)
             return res
         return Response(
           {
