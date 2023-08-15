@@ -12,14 +12,14 @@ class SeriesListCreateView(ListCreateAPIView):
     return self.list(request, *args, *kwargs)
   
   def post(self, request, *args, **kwargs):
-    if request.user is None:
+    if not request.user:
       return Response({"message":"login first"}, status=status.HTTP_400_BAD_REQUEST)
     print(request.user.uuid)
     return self.create(request, *args, **kwargs)
   
   def perform_create(self, serializer):
     writer = self.request.user
-    serializer.save(writer=writer)
+    if writer: serializer.save(writer=writer)
 
 class SeriesRetrieveView(RetrieveUpdateDestroyAPIView):
     queryset = Series.objects.all()

@@ -3,6 +3,8 @@ from column.models.column import Column
 from user.models.user import User
 from column.serializers.columnSerializer import ColumnSerializer
 from column.serializers.columnRegisterSerializer import ColumnRegisterSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
 class ColumnCRUDView(ListCreateAPIView):
     queryset = Column.objects.all()
@@ -21,8 +23,13 @@ class ColumnCRUDView(ListCreateAPIView):
     # ( 현재 사용자 인증은 bearer 토큰으로 access token을 넘겨주면 자동으로 해줌 )
     def perform_create(self, serializer):
         user = self.request.user
-        serializer.save(user=user)
+        if user: serializer.save(user=user)
 
     def post(self, request, *args, **kwargs):
+        if request.user:
+            return Response(
+                {"message":"need to login"}
+                ,status=status.HTTP_400_BAD_REQUEST
+            )
         return self.create(request, *args, **kwargs)
               
