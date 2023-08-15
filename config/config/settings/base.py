@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'multiselectfield',
     #app
     'user',
     'column',
+    'series',
 ]
 
 # 내가 등록한 user 사용

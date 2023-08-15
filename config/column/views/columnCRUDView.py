@@ -9,6 +9,7 @@ class ColumnCRUDView(ListCreateAPIView):
 
     # 필요한 정보 ( 여기서는 현재 사용자의 칼럼 목록) 을 반환
     # 나중에 수정 / 삭제 시 ListCreateAPIView 내부에서 사용함
+
     def get_queryset(self): # 
         user_uuid = self.request.user.uuid
         queryset = Column.objects.filter(user=user_uuid)

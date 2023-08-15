@@ -6,6 +6,7 @@ class ColumnCertainView(RetrieveUpdateDestroyAPIView):
     queryset = Column.objects.all()
     serializer_class = ColumnSerializer
     # lookup 필드 생성 --> 이걸로 칼럼들 서로 구분함. 
+    
     # (urls.py에서 칼럼 id를 column_id로 설정했기 때문에 lookup_field를 column_id로 해야함)
     lookup_field = 'column_id'
 

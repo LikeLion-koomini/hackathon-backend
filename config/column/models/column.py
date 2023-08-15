@@ -1,5 +1,7 @@
 from django.db import models
 from user.models.user import User
+from multiselectfield import MultiSelectField
+from categoryTuple import CATEGORY_CHOICES
 import uuid
 
 class Column(models.Model):
@@ -9,11 +11,12 @@ class Column(models.Model):
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     prefer = models.IntegerField(default=0)
-    category = models.CharField(max_length=10)
 
     # user
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', null=True)
 
+    # category
+    category = MultiSelectField(choices=CATEGORY_CHOICES, max_length=len(CATEGORY_CHOICES), null=True)
     # series
     # series_series_id = models.IntegerField()
     # series_user_id = models.IntegerField()
