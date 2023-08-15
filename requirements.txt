@@ -1,8 +1,0 @@
-Django
-djangorestframework
-Pillow
-python-decouple
-djangorestframework-simplejwt
-django-rest-auth
-django-multiselectfield
-drf-yasg
