@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'multiselectfield',
+    #drf-swagger
+    'drf_yasg',
     #app
     'user',
     'column',
