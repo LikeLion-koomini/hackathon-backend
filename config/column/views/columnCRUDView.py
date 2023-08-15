@@ -2,6 +2,7 @@ from rest_framework.generics import ListCreateAPIView
 from column.models.column import Column
 from user.models.user import User
 from column.serializers.columnSerializer import ColumnSerializer
+from column.serializers.columnRegisterSerializer import ColumnRegisterSerializer
 
 class ColumnCRUDView(ListCreateAPIView):
     queryset = Column.objects.all()
