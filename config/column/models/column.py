@@ -15,7 +15,7 @@ class Column(models.Model):
     price = models.IntegerField(default=0)
     # user
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', null=True)
-
+    userName = models.CharField(max_length=45, null=True)
     # category
     category = MultiSelectField(choices=CATEGORY_CHOICES, max_length=len(CATEGORY_CHOICES), null=True)
     # series

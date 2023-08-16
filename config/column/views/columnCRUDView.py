@@ -2,7 +2,6 @@ from rest_framework.generics import ListCreateAPIView
 from column.models.column import Column
 from user.models.user import User
 from column.serializers.columnSerializer import ColumnSerializer
-from column.serializers.columnRegisterSerializer import ColumnRegisterSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -22,11 +21,12 @@ class ColumnCRUDView(ListCreateAPIView):
     # post > create에서 현재 로그인한 user 데이터를 저장 
     # ( 현재 사용자 인증은 bearer 토큰으로 access token을 넘겨주면 자동으로 해줌 )
     def perform_create(self, serializer):
-        user = self.request.user
-        if user: serializer.save(user=user)
+        if self.request.user:
+            user = self.request.user
+            userName = self.request.user.userName
+            if user: serializer.save(user=user, userName=userName)
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         if not request.user:
             return Response(
                 {"message":"need to login"}

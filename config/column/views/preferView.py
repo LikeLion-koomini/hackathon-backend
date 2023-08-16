@@ -11,8 +11,9 @@ class PreferView(APIView):
             # 사용자의 좋아요 확인
             user = self.request.user
             if ColumnPrefer.objects.filter(column=instance, user=user).exists():
-                return Response({'message': 'Already liked'}, status=status.HTTP_400_BAD_REQUEST)
-
+                print(ColumnPrefer.objects.all())
+                # return Response({'message': 'Already liked'}, status=status.HTTP_400_BAD_REQUEST)
+                return self.delete_prefer(instance)
             # 좋아요 생성
             ColumnPrefer.objects.create(column=instance, user=user)
 
@@ -24,10 +25,8 @@ class PreferView(APIView):
         except Column.DoesNotExist:
             return Response({'message': 'Column not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    def delete(self, request, column_id, *args, **kwargs):
+    def delete_prefer(self, instance):
         try:
-            instance = Column.objects.get(column_id=column_id)
-            
             # 사용자의 좋아요 확인
             user = self.request.user
             try:
