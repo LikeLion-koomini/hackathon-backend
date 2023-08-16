@@ -23,6 +23,7 @@ class ColumnRegisterSerializer(serializers.ModelSerializer):
             created_at=created_at,
             prefer=prefer,
             category=category,
+            price=price,
         )
         column.save()
         return column

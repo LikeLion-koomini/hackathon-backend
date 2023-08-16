@@ -1,5 +1,6 @@
 from django.db import models
 from user.models.user import User
+from series.models.series import Series
 from multiselectfield import MultiSelectField
 from categoryTuple import CATEGORY_CHOICES
 import uuid
@@ -18,7 +19,7 @@ class Column(models.Model):
     # category
     category = MultiSelectField(choices=CATEGORY_CHOICES, max_length=len(CATEGORY_CHOICES), null=True)
     # series
-    # series_series_id = models.IntegerField()
+    series_id = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='series', null=True)
     # series_user_id = models.IntegerField()
 
     class Meta:

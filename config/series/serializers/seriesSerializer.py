@@ -4,6 +4,8 @@ from user.serializers import UserInfoSerializer
 
 class SeriesSerializer(serializers.ModelSerializer):
     writer = UserInfoSerializer
+    columnCount = serializers.IntegerField(default=0)
+    writerName = serializers.CharField(default=None)
     class Meta:
         model = Series
         fields = '__all__'
@@ -15,12 +17,14 @@ class SeriesSerializer(serializers.ModelSerializer):
         content = validated_data.get('content')
         # 사용자 추출
         writer = self.context['request'].user
+        writerName = writer.userName if writer.userName else None
         # 저장
         series = Series(
             series_id = series_id,
             title = title,
             content = content,
             writer = writer,
+            writerName = writerName,
         )
         series.save()
         return series
