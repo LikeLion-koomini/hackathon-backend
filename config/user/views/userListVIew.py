@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.generics import ListAPIView # 목록 조회를 편하게 해주는 모듈
 from user.models import User # user/models에 있는 User 모델
 from user.serializers import UserInfoSerializer # user/serializers에 있는 시리얼라이저
