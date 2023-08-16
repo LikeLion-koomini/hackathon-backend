@@ -7,6 +7,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = ['uuid', 'userId', 'password', 'userName', 'email', 'phone_number', 'birth']
 
     def create(self, validated_data):
+        uuid = validated_data.get('uuid')
         userId = validated_data.get('userId')
         password = validated_data.get('password')
         userName = validated_data.get('userName')
@@ -14,6 +15,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         phone_number = validated_data.get('phone_number')
         birth = validated_data.get('birth')
         user = User(
+            uuid = uuid,
             userId=userId, 
             userName=userName, 
             email=email, 

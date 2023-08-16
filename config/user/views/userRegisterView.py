@@ -20,7 +20,7 @@ class UserRegisterView(APIView):
             
             res = Response(
                 {
-                    "user":request.data,
+                    "user":serializer.data,
                     "message": "user register success",
                     "token":{
                         "refresh_token":refresh_token,

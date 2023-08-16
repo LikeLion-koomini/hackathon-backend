@@ -15,6 +15,7 @@ class ColumnRegisterSerializer(serializers.ModelSerializer):
         created_at = validated_data.get('created_at')
         prefer = validated_data.get('prefer')
         category = validated_data.get('category')
+        price = validated_data.get('price')
         column = Column(
             column_id=column_id,
             title=title,

@@ -11,7 +11,7 @@ class Column(models.Model):
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     prefer = models.IntegerField(default=0)
-
+    price = models.IntegerField(default=0)
     # user
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', null=True)
 
