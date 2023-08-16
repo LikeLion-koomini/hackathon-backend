@@ -26,7 +26,7 @@ class ColumnCRUDView(ListCreateAPIView):
         if user: serializer.save(user=user)
 
     def post(self, request, *args, **kwargs):
-        if request.user:
+        if not request.user:
             return Response(
                 {"message":"need to login"}
                 ,status=status.HTTP_400_BAD_REQUEST
