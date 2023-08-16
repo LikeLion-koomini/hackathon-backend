@@ -15,10 +15,17 @@ class SeriesColumnCreate(ListCreateAPIView):
     def perform_create(self, serializer):
         user = self.request.user
         series = Series.objects.get(series_id=self.kwargs['series_id'])
-        if user: serializer.save(user=user, series_id=series)
+        if user: 
+            serializer.save(user=user, series_id=series)
+            series.columnCount+=1
+            series.save()
       
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
     
+    def get_queryset(self):
+        queryset = Column.objects.filter(series_id=self.kwargs['series_id'])
+        print(queryset)
+        return queryset
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

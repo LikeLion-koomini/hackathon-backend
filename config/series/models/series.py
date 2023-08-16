@@ -9,4 +9,5 @@ class Series(models.Model):
     content = models.CharField(null=False, max_length=500)
     writer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     writerName = models.CharField(null=True, max_length=100, default=None)
+    columnCount = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=datetime.now)

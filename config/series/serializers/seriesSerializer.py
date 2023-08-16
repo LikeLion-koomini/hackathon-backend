@@ -4,8 +4,6 @@ from user.serializers import UserInfoSerializer
 
 class SeriesSerializer(serializers.ModelSerializer):
     writer = UserInfoSerializer
-    columnCount = serializers.IntegerField(default=0)
-    writerName = serializers.CharField(default=None)
     class Meta:
         model = Series
         fields = '__all__'
