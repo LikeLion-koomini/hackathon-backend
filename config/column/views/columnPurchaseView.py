@@ -60,7 +60,7 @@ class ColumnPurchaseView(ListAPIView):
                   "message":"칼럼이 없어요"
               },status=status.HTTP_400_BAD_REQUEST)
           try: 
-            if Purchaser.objects.get(user_id=self.request.user, column_id=column):
+            if Purchaser.objects.get(user_id=self.request.user.uuid, column_id=column.column_id):
               return Response({
                   "purchase":True,
                   "message":"구매 완료"
