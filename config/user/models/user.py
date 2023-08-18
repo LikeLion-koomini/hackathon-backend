@@ -61,6 +61,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=False,
     )
 
+    money = models.IntegerField(
+        verbose_name='보유 금액',
+        default=1000,
+    )
     # User 모델의 필수 field
     # is_active = models.BooleanField(default=True)    
     # is_admin = models.BooleanField(default=False)

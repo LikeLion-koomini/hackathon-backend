@@ -6,4 +6,4 @@ class UserInfoSerializer(serializers.ModelSerializer):
     # fields : 보여줄 데이터들
     class Meta:
         model = User
-        fields = ['uuid', 'userId', 'userName','email', 'phone_number', 'birth']
+        fields = '__all__'
