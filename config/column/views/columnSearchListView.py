@@ -9,9 +9,10 @@ class ColumnSearchListView(ListAPIView):
 
     def get_queryset(self):
         # 검색 데이터 추출
-        title = self.request.data.get("title")
-        category = self.request.data.get("category")
-        uuid = self.request.data.get('uuid')
+        title = self.request.GET.get("title")
+        print(title)
+        category = self.request.GET.get("category")  # 여러 개의 값이라면 getlist 메서드 사용
+        uuid = self.request.GET.get('uuid')
         # 쿼리셋 추출
         queryset = Column.objects.none()
         if title is not None: 
