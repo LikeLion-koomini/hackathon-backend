@@ -7,3 +7,4 @@ django-rest-auth
 django-multiselectfield
 drf-yasg
 django-cors-headers
+django-environ

@@ -13,6 +13,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 from decouple import config
+from django.core.exceptions import ImproperlyConfigured
+import os, json
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+# runserver option
+DJANGO_SETTINGS_MODULE="config.settings.development"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -20,15 +29,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # runserver option
 DJANGO_SETTINGS_MODULE = config('DJANGO_SETTINGS_MODULE')
 
+secret_file = os.path.join(BASE_DIR, 'secrets.json')  # secrets.json 파일 위치를 명시
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting):
+    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+
+SECRET_KEY = get_secret("SECRET_KEY")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5b43&y2y0ee)bxgee1+*k)d^_k)@p821!w88ws%uzrl_jd$d=='
+# SECRET_KEY = 'django-insecure-5b43&y2y0ee)bxgee1+*k)d^_k)@p821!w88ws%uzrl_jd$d=='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -52,6 +74,9 @@ INSTALLED_APPS = [
     'column',
     'series',
 ]
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # 내가 등록한 user 사용
 AUTH_USER_MODEL = 'user.User'
@@ -98,7 +123,9 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=720),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30)
 }
-
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+SECURE_SSL_REDIRECT=True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
