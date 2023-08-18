@@ -47,4 +47,5 @@ class UserLoginView(APIView):
         )
         res.delete_cookie("access_token")
         res.delete_cookie("refresh_token")
+        print(request.session)
         return res

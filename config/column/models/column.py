@@ -21,7 +21,6 @@ class Column(models.Model):
     # series
     series_id = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='series', null=True)
     # series_user_id = models.IntegerField()
-
     class Meta:
         db_table = 'column'
     
@@ -37,3 +36,7 @@ class ColumnPrefer(models.Model):
     
     def __str__(self):
         return f"Prefer: {self.user.userName}"
+
+class Purchaser(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    column_id = models.ForeignKey(Column, on_delete=models.CASCADE, null=True)

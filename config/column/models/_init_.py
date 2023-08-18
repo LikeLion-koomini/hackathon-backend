@@ -1,1 +1,1 @@
-from .column import Column, ColumnPrefer
+from .column import Column, ColumnPrefer, Purchaser
